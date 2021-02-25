@@ -3,7 +3,7 @@
  * @Author: Mr.WJ
  * @Date: 2021-02-24 14:44:33
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-24 17:00:18
+ * @LastEditTime: 2021-02-25 14:01:26
 -->
 <template>
   <div class="j__body-status">
@@ -13,12 +13,13 @@
         <el-date-picker
           size="mini"
           v-model="value1"
+          value-format = "timestamp"
           type="datetimerange"
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
         ></el-date-picker>
-        <el-button size="mini" type="primary" class="btn-search">查询</el-button>
+        <el-button size="mini" type="primary" class="btn-search" @click = "search">查询</el-button>
         <el-button size="mini" type="primary" @click="add">添加</el-button>
       </div>
     </div>
@@ -29,9 +30,20 @@
         header-row-class-name="table-header"
         style="width: 100%"
       >
-        <el-table-column prop="date" label="日期" width="180"></el-table-column>
-        <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-        <el-table-column prop="address" label="地址"></el-table-column>
+          <el-table-column
+          type="index"
+          >
+        </el-table-column>
+        <el-table-column prop="date" label="日期" width="200"></el-table-column>
+        <el-table-column prop="time" label="持续时长(S)" width="200"></el-table-column>
+        <el-table-column prop="reasonValue" label="原因" width="200"></el-table-column>
+        <el-table-column
+          fixed="right"
+          label="操作">
+          <template slot-scope="scope">
+            <el-button @click="handleDelete(scope.row.id)" type="text" size="small">删除</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <el-dialog
@@ -47,7 +59,7 @@
             v-model="formLabelAlign.date"
             type="datetime"
             format="yyyy-MM-dd HH:mm:ss"
-            value-format="timestamp"
+            value-format="yyyy-MM-dd HH:mm:ss"
             placeholder="选择日期时间">
           </el-date-picker>
         </el-form-item>
@@ -74,6 +86,7 @@
 </template>
 
 <script>
+import * as _utils from '@/utils';
 const path = window.require('path');
 const fs = window.require('fs');
 const {ipcRenderer,remote} = window.require('electron');
@@ -84,78 +97,22 @@ export default {
     return {
       value1: "",
       options: [{
-          value: '1',
+          value: '运动',
           label: '运动'
         }, {
-          value: '2',
+          value: '静止',
           label: '静止'
         }, {
-          value: '3',
+          value: '发热/发冷',
           label: '发热/发冷'
         }, {
-          value: '4',
+          value: '其他',
           label: '其他'
         }],
       dialogVisible:false,
       reasonValue:'',
 
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ],
+      tableData: [],
       formLabelAlign: {
           date: '',
           time: '',
@@ -163,14 +120,54 @@ export default {
         }
     };
   },
+  created () {
+    this.getBodyInfo();
+  },
   methods: {
-    onSubmit() {},
-    handleClose(){},
+    search(){
+      if(!this.value1){
+        this.getBodyInfo();
+      }else{
+        this.$db.getDataByTime('t_body',this.value1[0],this.value1[1],(res)=>{
+          this.tableData = res.data;
+        })
+      }
+    },
+    getBodyInfo(){
+      this.$db.getDataAll('t_body',(res)=>{
+        this.tableData = res.data;
+      });
+    },
+    handleClose(){
+      this.dialogVisible = false;
+    },
     add(){
-      this.dialogVisible = true
+      this.dialogVisible = true;
+    },
+     handleDelete(id){
+      console.log(id)
+      this.$db.deleteData('t_body',id,(res)=>{
+        this.$message({
+          message:'删除成功',
+          type:'success'
+        });
+        this.getBodyInfo();
+      });
     },
     saveData(){
-      
+      let _data = {
+        id:_utils.guid(),
+        timeStamp:new Date(this.formLabelAlign.date).getTime(),
+        ...this.formLabelAlign
+      }
+      this.$db.addData('t_body',_data,(data)=>{
+        this.$message({
+          message:'添加成功',
+          type:'success'
+        });
+        this.dialogVisible = false;
+        this.getBodyInfo();
+      })
     }
   }
 };

@@ -3,12 +3,12 @@
  * @Author: Mr.WJ
  * @Date: 2021-02-24 11:50:03
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-24 14:53:04
+ * @LastEditTime: 2021-02-25 14:03:26
 -->
 <template>
   <el-container class ="j__main">
     <el-aside class="j__aside">
-      <div class="j__nav-bar">
+      <div class="j__nav-bar" @click = "goHome">
         <img src="@/assets/avator.jpg" alt="">
       </div>
       <div class="j__nav-bar" v-for ="item of navData" :key = "item.id" @click="itemClick(item)">
@@ -59,6 +59,12 @@
         });
         console.log(item.href)
         this.$router.push({name:item.href})
+      },
+      goHome(){
+        this.navData.map((el)=>{
+          el.isActive = false;
+        });
+        this.$router.push({name:'home'})
       }
     },
   }
