@@ -3,7 +3,7 @@
  * @Author: Mr.WJ
  * @Date: 2021-02-24 11:50:03
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-26 15:26:14
+ * @LastEditTime: 2021-02-26 16:22:37
 -->
 <template>
   <el-container class ="j__main">
@@ -15,7 +15,6 @@
         <i class="iconfont" :class="[item.isActive ? item.activeIcon + ' active': item.icon]"></i>
       </div>
       <div class="j__nav-bar foot">
-        <i class="iconfont icon-sortlight"></i>
       </div>
     </el-aside>
     <el-container class="j__content">
@@ -72,7 +71,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .j__main{
   .el-main{
     padding: 10px;
@@ -99,7 +98,7 @@
         color: #e0e0e0;
         font-size:24px;
         &.active{
-          color:#22cc92;
+          color:#9de0ff;
         }
       }
     }
@@ -129,6 +128,19 @@
       -webkit-app-region: drag;
       height:40px !important;
       // border-bottom: solid 1px #152b3e;
+    }
+  }
+}
+.el-popover{
+  background: rgb(0, 0, 38) !important;
+  padding: 0 !important;
+  border:none !important;
+  ul{
+    padding: 0;
+    li{
+      list-style: none;
+      color:#e0e0e0;
+      text-align: center;
     }
   }
 }

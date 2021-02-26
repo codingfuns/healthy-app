@@ -3,7 +3,7 @@
  * @Author: Mr.WJ
  * @Date: 2021-02-24 14:44:33
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-26 13:43:23
+ * @LastEditTime: 2021-02-26 15:39:58
 -->
 <template>
   <div class="j__body-status">
@@ -70,6 +70,7 @@
       class="add-dialog"
       :visible.sync="dialogVisible"
       width="300"
+      top="8vh"
       :before-close="handleClose">
       <el-form label-position="right" label-width="100px" :model="formLabelAlign">
         <el-form-item label="时间">
@@ -184,9 +185,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40px;
+  height: 40px;
     span {
-      font-size: 14px;
+      font-size: 20px;
+      color:#9de0ff;
       font-weight: bold;
     }
     .title-operate {

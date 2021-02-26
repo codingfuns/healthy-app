@@ -184,7 +184,8 @@ export default {
     align-items: center;
     height: 40px;
     span {
-      font-size: 14px;
+      font-size: 20px;
+      color:#9de0ff;
       font-weight: bold;
     }
     .title-operate {

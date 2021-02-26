@@ -3,7 +3,7 @@
  * @Author: 
  * @Date: 2020-07-20 20:41:35
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-26 11:28:52
+ * @LastEditTime: 2021-02-26 16:13:48
 --> 
 <template>
   <div id="app">
@@ -34,10 +34,9 @@
 }
 .hover-row>td{
   background-color: #023970 !important;
-  
 }
 .el-table--enable-row-hover .el-table__body tr:hover>td {
-    background-color:  #023970 !important;
+    background-color:  rgb(0, 0, 38,0.5) !important;
 }
 .el-table--border::after, .el-table--group::after, .el-table::before {
   background-color: transparent !important;
@@ -45,6 +44,18 @@
 .el-input__inner{
   background: transparent !important;
   border: 1px solid #2c3e50 !important;
+}
+.el-dialog, .el-pager li {
+  background: rgb(0, 0, 38) !important;
+}
+.el-dialog__body{
+  padding: 0 !important;
+}
+.el-form-item__label{
+  color:#e0e0e0 !important;
+}
+.el-dialog__title{
+  color:#e0e0e0 !important;
 }
 input{
   background: transparent !important;
