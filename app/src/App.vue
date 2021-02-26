@@ -3,7 +3,7 @@
  * @Author: 
  * @Date: 2020-07-20 20:41:35
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-26 16:13:48
+ * @LastEditTime: 2021-02-26 16:38:16
 --> 
 <template>
   <div id="app">
@@ -56,6 +56,14 @@
 }
 .el-dialog__title{
   color:#e0e0e0 !important;
+}
+.el-picker-panel{
+  background: rgb(0, 0, 38) !important;
+  border:none !important;
+}
+.el-picker-panel__footer{
+  background: rgb(0, 0, 38) !important;
+  border:none !important;
 }
 input{
   background: transparent !important;
