@@ -3,7 +3,7 @@
  * @Author: 
  * @Date: 2020-07-20 20:41:35
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-24 16:06:25
+ * @LastEditTime: 2021-02-26 11:28:52
 --> 
 <template>
   <div id="app">
@@ -17,6 +17,37 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  background: url('./assets/bg.jpg')
+}
+
+.el-table th, .el-table tr {
+    background-color: transparent !important;
+}
+.el-table, .el-table__expanded-cell {
+    background-color: transparent !important;
+}
+.el-table td, .el-table th.is-leaf {
+  border-bottom: 1px solid #2c3e50 !important;
+}
+.el-table .cell{
+  color: #ffffff;
+}
+.hover-row>td{
+  background-color: #023970 !important;
+  
+}
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+    background-color:  #023970 !important;
+}
+.el-table--border::after, .el-table--group::after, .el-table::before {
+  background-color: transparent !important;
+}
+.el-input__inner{
+  background: transparent !important;
+  border: 1px solid #2c3e50 !important;
+}
+input{
+  background: transparent !important;
 }
 body{
   padding: 0;

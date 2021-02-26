@@ -3,7 +3,7 @@
  * @Author: Mr.WJ
  * @Date: 2021-02-24 11:50:03
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-25 14:03:26
+ * @LastEditTime: 2021-02-26 15:26:14
 -->
 <template>
   <el-container class ="j__main">
@@ -13,6 +13,9 @@
       </div>
       <div class="j__nav-bar" v-for ="item of navData" :key = "item.id" @click="itemClick(item)">
         <i class="iconfont" :class="[item.isActive ? item.activeIcon + ' active': item.icon]"></i>
+      </div>
+      <div class="j__nav-bar foot">
+        <i class="iconfont icon-sortlight"></i>
       </div>
     </el-aside>
     <el-container class="j__content">
@@ -57,7 +60,6 @@
           });
           item.isActive = true;
         });
-        console.log(item.href)
         this.$router.push({name:item.href})
       },
       goHome(){
@@ -72,12 +74,16 @@
 
 <style lang="scss" scoped>
 .j__main{
+  .el-main{
+    padding: 10px;
+  }
   .j__aside{
     width: 60px !important;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #152b3e;
+    position: relative;
+    // background: #152b3e;
     .j__nav-bar{
       height: 60px;
       display: flex;
@@ -88,13 +94,24 @@
         height: 40px;
         width: 40px;
         border-radius: 40px;
-        background: url('./assets/logo.png') no-repeat;
       }
       i{
         color: #e0e0e0;
         font-size:24px;
         &.active{
           color:#22cc92;
+        }
+      }
+    }
+    .j__nav-bar.foot{
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      font-size: 24px;
+      i{
+        color: #e0e0e0;
+        &:hover{
+          color: #ffffff;
         }
       }
     }
@@ -107,10 +124,11 @@
   }
   .j__content{
     width: 100%;
-    border:solid 1px #d0d0d0;
+    border-left:solid 1px #152b3e;
     .j__header{
-      height:60px;
-      border-bottom: solid 1px #e0e0e0;
+      -webkit-app-region: drag;
+      height:40px !important;
+      // border-bottom: solid 1px #152b3e;
     }
   }
 }

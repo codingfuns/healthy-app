@@ -3,7 +3,7 @@
  * @Author: Mr.WJ
  * @Date: 2021-02-24 14:44:33
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-25 10:45:31
+ * @LastEditTime: 2021-02-26 13:43:23
 -->
 <template>
   <div class="j__body-status">
@@ -58,7 +58,6 @@
         </el-table-column>
         <el-table-column prop="remark" label="备注" width="100"></el-table-column>
         <el-table-column
-          fixed="right"
           label="操作">
           <template slot-scope="scope">
             <el-button @click="handleDelete(scope.row.id)" type="text" size="small">删除</el-button>
@@ -210,7 +209,7 @@ export default {
 .table-header {
   th,
   tr {
-    background-color: #f5f7fa !important;
+    background-color: transparent !important;
   }
 }
  .add-dialog{

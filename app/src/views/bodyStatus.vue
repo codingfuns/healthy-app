@@ -3,7 +3,7 @@
  * @Author: Mr.WJ
  * @Date: 2021-02-24 14:44:33
  * @LastEditors: Mr.WJ
- * @LastEditTime: 2021-02-25 14:01:26
+ * @LastEditTime: 2021-02-26 11:19:42
 -->
 <template>
   <div class="j__body-status">
@@ -26,8 +26,10 @@
     <div class="j__table">
       <el-table
         :data="tableData"
+        size ="small"
         height="calc(100vh - 200px)"
         header-row-class-name="table-header"
+        row-class-name ="table-row"
         style="width: 100%"
       >
           <el-table-column
@@ -38,7 +40,6 @@
         <el-table-column prop="time" label="持续时长(S)" width="200"></el-table-column>
         <el-table-column prop="reasonValue" label="原因" width="200"></el-table-column>
         <el-table-column
-          fixed="right"
           label="操作">
           <template slot-scope="scope">
             <el-button @click="handleDelete(scope.row.id)" type="text" size="small">删除</el-button>
@@ -206,7 +207,7 @@ export default {
 .table-header {
   th,
   tr {
-    background-color: #f5f7fa !important;
+    background-color: transparent !important;
   }
 }
  .add-dialog{
